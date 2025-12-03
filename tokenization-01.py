@@ -1,6 +1,9 @@
+from typing import TypeAlias
 import nltk
 
 nltk.download("punkt_tab")
+
+Vector: TypeAlias = list[str]
 
 text = """
 Abacaxi com leite em pó é uma das melhores sobremesas e menos calóricas considerando o sabor que se pode comer após o almoço.
@@ -16,18 +19,19 @@ print(word_tokens)
 print("######### SENTENCE TOKENS ############")
 print(sentence_tokens)
 
-### Preprocessing step -> removing special chars, creating standard
+
+### Preprocessing step -> removing special chars, creating standards for the text
 
 
-def preprocess(text):
+def preprocess(text: str) -> Vector:
     tokens = nltk.word_tokenize(text.lower())
     return [word for word in tokens if word.isalnum()]
 
 
 documents = [
-    "Machine learning é o aprendizado automático de máquinas a partir de dados.",
-    "Ele permite que sistemas façam previsões e decisões sem programação explícita.",
-    "É usado em áreas como reconhecimento de voz, imagens e recomendação de conteúdo.",
+    "Machine learning é o aprendizado automático de máquinas a partir da ingestão de grandes quantidades de dados.",
+    "Essa disciplina permite que sistemas façam previsões e decisões sem programação explícita.",
+    "A técnica é utilizada em áreas como reconhecimento de voz, imagens e recomendação de conteúdo.",
 ]
 
 preprocessed_docs = [" ".join(preprocess(doc)) for doc in documents]
